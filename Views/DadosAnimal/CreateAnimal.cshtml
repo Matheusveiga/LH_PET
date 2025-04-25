@@ -1,0 +1,113 @@
+@model LH_PET.Models.Animal
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+<title>@ViewData["Title"] - Cadastrar Animal</title>
+
+<h2>Cadastrar Animal</h2>
+
+@if (TempData["Erros"] != null)
+{
+    <div class="alert alert-danger">@TempData["Erros"]</div>
+}
+
+
+<form asp-action="CreateAnimal" method="post">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <label>Nome:</label>
+    <input asp-for="Nome" class="form-control" />
+    <span asp-validation-for="Nome" class="text-danger"></span>
+    <br />
+
+    <label>Tipo:</label>
+    <select asp-for="Tipo" class="form-control">
+        <option value="">Selecione</option>
+        <option value="Cachorro">Cachorro</option>
+        <option value="Gato">Gato</option>
+        <option value="Outro">Outro</option>
+    </select>
+    <span asp-validation-for="Tipo" class="text-danger"></span>
+    <br />
+
+    <label>Sexo:</label>
+    <select asp-for="Sexo" class="form-control">
+        <option value="">Selecione</option>
+        <option value="Macho">Macho</option>
+        <option value="Fêmea">Fêmea</option>
+    </select>
+    <span asp-validation-for="Sexo" class="text-danger"></span>
+    <br />
+
+    <label>Raça:</label>
+    <input asp-for="Raca" class="form-control" />
+    <span asp-validation-for="Raca" class="text-danger"></span>
+    <br />
+
+    <label>Idade:</label>
+    <input asp-for="Idade" class="form-control" />
+    <span asp-validation-for="Idade" class="text-danger"></span>
+    <br />
+
+    <label>Tutor (Cliente):</label>
+    <input type="text" id="cliente-nome" class="form-control" autocomplete="off" />
+    <input asp-for="ClienteID" type="hidden" id="cliente-id" />
+    <div id="sugestoes" class="list-group mt-1"></div>
+    <span asp-validation-for="ClienteID" class="text-danger"></span>
+    <br />
+
+
+    <button type="submit" class="btn btn-success">Cadastrar</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const nomeInput = document.getElementById('cliente-nome');
+            const sugestoesDiv = document.getElementById('sugestoes');
+            const clienteIdInput = document.getElementById('cliente-id');
+
+            document.querySelector("form").addEventListener("submit", function (e) {
+                const clienteIdInput = document.getElementById("cliente-id");
+                if (!clienteIdInput.value || clienteIdInput.value === "0") {
+                    alert("Por favor, selecione um tutor (cliente) da lista.");
+                    e.preventDefault();
+                }
+            });
+
+
+            nomeInput.addEventListener('input', function () {
+                const termo = this.value;
+                if (termo.length < 2) {
+                    sugestoesDiv.innerHTML = '';
+                    return;
+                }
+
+                fetch(`/DadosAnimal/BuscarClientes?termo=${termo}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        sugestoesDiv.innerHTML = '';
+                        data.forEach(cliente => {
+                            const item = document.createElement('a');
+                            item.href = '#';
+                            item.classList.add('list-group-item', 'list-group-item-action');
+                            item.textContent = cliente.nome;
+                            item.dataset.id = cliente.id;
+                            item.addEventListener('click', function (e) {
+                                e.preventDefault();
+                                nomeInput.value = cliente.nome;
+                                clienteIdInput.value = cliente.id;
+                                sugestoesDiv.innerHTML = '';
+                            });
+                            sugestoesDiv.appendChild(item);
+                        });
+                    });
+            });
+        });
+    </script>
+}

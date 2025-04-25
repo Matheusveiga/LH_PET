@@ -1,0 +1,20 @@
+﻿@model LH_PET.Models.Fornecedor
+<Title>@ViewData["Title"] -  Cadastrar Fornecedor</Title>
+
+<h2>Cadastrar Cliente</h2>
+<form asp-action="Create" method="post">
+    <label>Nome:</label>
+    <input asp-for="Nome" class="form-control" />
+    <br />
+
+    <label>CNPJ:</label>
+    <input asp-for="CNPJ" class="form-control" />
+    <br />
+
+    <label>Email:</label>
+    <input asp-for="Email" class="form-control" />
+    <br />
+
+    <button type="submit" class="btn-success">Salvar</button>
+
+</form>

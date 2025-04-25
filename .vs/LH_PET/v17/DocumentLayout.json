@@ -1,0 +1,224 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|c:\\users\\ead_devs_t1\\source\\repos\\lh_pet\\controllers\\dadosfornecedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|solutionrelative:controllers\\dadosfornecedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|c:\\users\\ead_devs_t1\\source\\repos\\lh_pet\\controllers\\dadosclientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|solutionrelative:controllers\\dadosclientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|c:\\users\\ead_devs_t1\\source\\repos\\lh_pet\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|c:\\users\\ead_devs_t1\\source\\repos\\lh_pet\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|solutionrelative:controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|c:\\users\\ead_devs_t1\\source\\repos\\lh_pet\\views\\dadosfornecedor\\createfornecedor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|solutionrelative:views\\dadosfornecedor\\createfornecedor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|c:\\users\\ead_devs_t1\\source\\repos\\lh_pet\\views\\dadosfornecedor\\buscarfornecedor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|solutionrelative:views\\dadosfornecedor\\buscarfornecedor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|c:\\users\\ead_devs_t1\\source\\repos\\lh_pet\\models\\fornecedor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|solutionrelative:models\\fornecedor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|c:\\users\\ead_devs_t1\\source\\repos\\lh_pet\\views\\dadoscliente\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|solutionrelative:views\\dadoscliente\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|c:\\users\\ead_devs_t1\\source\\repos\\lh_pet\\views\\dadoscliente\\buscar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|solutionrelative:views\\dadoscliente\\buscar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|c:\\users\\ead_devs_t1\\source\\repos\\lh_pet\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|solutionrelative:models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|c:\\users\\ead_devs_t1\\source\\repos\\lh_pet\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|c:\\users\\ead_devs_t1\\source\\repos\\lh_pet\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD39C109-4AE3-4D08-977F-1EB5E8AFB38B}|LH_PET.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DadosClienteController.cs",
+              "DocumentMoniker": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Controllers\\DadosClienteController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DadosClienteController.cs",
+              "ToolTip": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Controllers\\DadosClienteController.cs",
+              "RelativeToolTip": "Controllers\\DadosClienteController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T23:49:29.491Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Buscar.cshtml",
+              "DocumentMoniker": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Views\\DadosCliente\\Buscar.cshtml",
+              "RelativeDocumentMoniker": "Views\\DadosCliente\\Buscar.cshtml",
+              "ToolTip": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Views\\DadosCliente\\Buscar.cshtml",
+              "RelativeToolTip": "Views\\DadosCliente\\Buscar.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-07T22:43:27.488Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ClientesController.cs",
+              "DocumentMoniker": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Controllers\\ClientesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClientesController.cs",
+              "ToolTip": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Controllers\\ClientesController.cs",
+              "RelativeToolTip": "Controllers\\ClientesController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T22:31:37.987Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Views\\DadosCliente\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\DadosCliente\\Create.cshtml",
+              "ToolTip": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Views\\DadosCliente\\Create.cshtml",
+              "RelativeToolTip": "Views\\DadosCliente\\Create.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-07T22:30:34.075Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Fornecedor.cs",
+              "DocumentMoniker": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Models\\Fornecedor.cs",
+              "RelativeDocumentMoniker": "Models\\Fornecedor.cs",
+              "ToolTip": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Models\\Fornecedor.cs",
+              "RelativeToolTip": "Models\\Fornecedor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T22:19:02.864Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAACUAAABqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-08T00:11:01.774Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BuscarFornecedor.cshtml",
+              "DocumentMoniker": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Views\\DadosFornecedor\\BuscarFornecedor.cshtml",
+              "RelativeDocumentMoniker": "Views\\DadosFornecedor\\BuscarFornecedor.cshtml",
+              "ToolTip": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Views\\DadosFornecedor\\BuscarFornecedor.cshtml",
+              "RelativeToolTip": "Views\\DadosFornecedor\\BuscarFornecedor.cshtml",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAB4AAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-08T00:45:12.551Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DadosFornecedorController.cs",
+              "DocumentMoniker": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Controllers\\DadosFornecedorController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DadosFornecedorController.cs",
+              "ToolTip": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Controllers\\DadosFornecedorController.cs",
+              "RelativeToolTip": "Controllers\\DadosFornecedorController.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAgwCAAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T00:35:28.02Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CreateFornecedor.cshtml",
+              "DocumentMoniker": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Views\\DadosFornecedor\\CreateFornecedor.cshtml",
+              "RelativeDocumentMoniker": "Views\\DadosFornecedor\\CreateFornecedor.cshtml",
+              "ToolTip": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Views\\DadosFornecedor\\CreateFornecedor.cshtml",
+              "RelativeToolTip": "Views\\DadosFornecedor\\CreateFornecedor.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-08T00:45:45.25Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-07T22:26:09.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Models\\Cliente.cs",
+              "RelativeDocumentMoniker": "Models\\Cliente.cs",
+              "ToolTip": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Models\\Cliente.cs",
+              "RelativeToolTip": "Models\\Cliente.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAQwAcAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T22:15:56.171Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\EAD_DevS_T1\\source\\repos\\LH_PET\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T22:10:10.11Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

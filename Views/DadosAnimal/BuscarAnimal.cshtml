@@ -1,0 +1,38 @@
+@model List<LH_PET.Models.Animal>
+
+<title>@ViewData["Title"] - Consultar Animal</title>
+
+<h2>Lista de Animais</h2>
+<form method="get" class="row mb-3">
+    <div class="col-md-10">
+        <input type="text" name="busca" placeholder="Buscar..." class="form-control"
+            value="@(Context.Request.Query["busca"])" />
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+    </div>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>AnimalID</th>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Raca</th>
+            <th>Idade</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.AnimalID</td>
+                <td>@c.Nome</td>
+                <td>@c.Tipo</td>
+                <td>@c.Raca</td>
+                <td>@c.Idade</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,42 @@
+﻿@model List<LH_PET.Models.Cliente>
+
+<title>@ViewData["Title"] -  Consultar Cliente</title>
+
+<h2>Lista de Cliente</h2>
+<form method="get" class="row mb-3">
+    <div class="col-md-10">
+        <input type="text" name="busca" placeholder="Buscar..." class="form-control" value="@(Context.Request.Query["busca"])" />
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+    </div>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ClienteID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Email</th>
+            <th>Ações</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.ClienteID</td>
+                <td>@c.Nome</td>
+                <td>@c.CPF</td>
+                <td>@c.Email</td>
+                <td> <a asp-action="Detalhes" asp-route-id="@c.ClienteID" class="btn btn-sm btn-info">
+        Ver Detalhes
+    </a>
+</td>
+
+            </tr>
+        }
+    </tbody>
+</table>

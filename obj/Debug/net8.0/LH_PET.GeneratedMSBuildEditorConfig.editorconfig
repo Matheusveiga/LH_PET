@@ -1,0 +1,81 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = LH_PET
+build_property.RootNamespace = LH_PET
+build_property.ProjectDir = /home/matheus/Área de trabalho/LH_PET/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /home/matheus/Área de trabalho/LH_PET
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/DadosAnimal/BuscarAnimal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFkb3NBbmltYWwvQnVzY2FyQW5pbWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/DadosAnimal/CreateAnimal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFkb3NBbmltYWwvQ3JlYXRlQW5pbWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/DadosAnimal/EditarAnimal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFkb3NBbmltYWwvRWRpdGFyQW5pbWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/DadosCliente/Buscar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFkb3NDbGllbnRlL0J1c2Nhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/DadosCliente/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFkb3NDbGllbnRlL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/DadosCliente/Detalhes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFkb3NDbGllbnRlL0RldGFsaGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/DadosFornecedor/BuscarFornecedor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFkb3NGb3JuZWNlZG9yL0J1c2NhckZvcm5lY2Vkb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/DadosFornecedor/CreateFornecedor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFkb3NGb3JuZWNlZG9yL0NyZWF0ZUZvcm5lY2Vkb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-52m1h74skk

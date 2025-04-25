@@ -1,0 +1,40 @@
+@model LH_PET.Models.Cliente
+
+<h2>Dados do Cliente</h2>
+
+<p><strong>Nome:</strong> @Model.Nome</p>
+<p><strong>CPF:</strong> @Model.CPF</p>
+<p><strong>Email:</strong> @Model.Email</p>
+
+@if (Model.Animais != null && Model.Animais.Any())
+{
+    <h3>Animais:</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Raça</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var animal in Model.Animais)
+            {
+                <tr>
+                    <td>@animal.Nome</td>
+                    <td>@animal.Tipo</td>
+                    <td>@animal.Raca</td>
+                    <td>
+                        <a asp-controller="DadosAnimal" asp-action="EditarAnimal" asp-route-id="@animal.AnimalID" class="btn btn-sm btn-warning">Editar</a>
+                        <a asp-controller="DadosAnimal" asp-action="ExcluirAnimal" asp-route-id="@animal.AnimalID" class="btn btn-sm btn-danger" onclick="return confirm('Deseja realmente excluir este animal?');">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p><em>Nenhum animal cadastrado.</em></p>
+}

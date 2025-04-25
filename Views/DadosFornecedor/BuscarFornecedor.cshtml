@@ -1,0 +1,35 @@
+﻿@model List<LH_PET.Models.Fornecedor>
+
+<title>@ViewData["Title"] -  Consultar Fornecedores</title>
+
+<h2>Lista de Fornecedores</h2>
+<form method="get" class="row mb-3">
+    <div class="col-md-10">
+        <input type="text" name="busca" placeholder="Buscar..." class="form-control" value="@(Context.Request.Query["busca"])" />
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+    </div>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>FornecedorID</th>
+            <th>Nome</th>
+            <th>CNPJ</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var d in Model)
+        {
+            <tr>
+                <td>@d.FornecedorID</td>
+                <td>@d.Nome</td>
+                <td>@d.CNPJ</td>
+                <td>@d.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>
