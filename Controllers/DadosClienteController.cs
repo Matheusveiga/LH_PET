@@ -1,10 +1,12 @@
 ﻿using LH_PET.Context;
 using LH_PET.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace LH_PET.Controllers
 {
+    [Authorize]
     public class DadosClienteController : Controller
     {
 

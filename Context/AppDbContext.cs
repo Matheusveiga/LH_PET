@@ -14,5 +14,7 @@ namespace LH_PET.Context
 
         public DbSet<Animal> Animais { get; set; } = null!;
 
+        public DbSet<User> Users { get; set; } = null!;
+
     }
 }

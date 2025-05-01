@@ -88,6 +88,7 @@ C:/Users/EAD_DevS_T1/source/repos/LH_PET/obj/Debug/net8.0/LH_PET.csproj.Up2Date
 /home/matheus/Área de trabalho/LH_PET/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll
 /home/matheus/Área de trabalho/LH_PET/bin/Debug/net8.0/MySqlConnector.dll
 /home/matheus/Área de trabalho/LH_PET/bin/Debug/net8.0/Pomelo.EntityFrameworkCore.MySql.dll
+/home/matheus/Área de trabalho/LH_PET/obj/Debug/net8.0/LH_PET.sourcelink.json
 /home/matheus/Área de trabalho/LH_PET/bin/Debug/net8.0/Humanizer.dll
 /home/matheus/Área de trabalho/LH_PET/bin/Debug/net8.0/Microsoft.Bcl.AsyncInterfaces.dll
 /home/matheus/Área de trabalho/LH_PET/bin/Debug/net8.0/Microsoft.CodeAnalysis.dll
