@@ -10,6 +10,8 @@ O **LH_PET** é um sistema web desenvolvido em ASP.NET MVC voltado para a gestã
 ---
 
 ## 📸 Demonstrações
+### Tela de Login com autenticação funcional
+![image](https://github.com/user-attachments/assets/17f31cac-a4a9-493f-8328-4c8f205e3680)
 
 ### 🏠 Tela Inicial
 ![TelaHome](https://github.com/user-attachments/assets/0e356bbe-16ff-4ca2-a90d-13b875c4ea73)
