@@ -32,13 +32,13 @@ O **LH_PET** é um sistema web desenvolvido em ASP.NET MVC voltado para a gestã
 ### ✏️ Edição de Animal
 ![TelaEdicaoAnimal](https://github.com/user-attachments/assets/9af7348f-a325-48ee-b339-1fd420adf2f7)
 
-### Agendamento de consultas
+### 📋 Agendamento de consultas
 ![image](https://github.com/user-attachments/assets/f8c17171-92b3-4767-b1c3-7a9b248e3d5d)
 
-### Calendario de consultas agendadas
+### 🔍 Calendario de consultas agendadas
 ![image](https://github.com/user-attachments/assets/29454af8-ee2e-4c14-b783-be4138f0b6a3)
 
-### Tela de edição de consultas
+### ✏️ Tela de edição de consultas
 ![image](https://github.com/user-attachments/assets/6762584c-0895-46bb-ac88-d6586278b6dc)
 
 ---
