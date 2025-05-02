@@ -1,0 +1,31 @@
+@model LH_PET.Models.ConsultaViewModel
+
+@{
+    ViewData["Title"] = "Agendar Consulta";
+}
+
+<h2 class="text-center mt-4">Agendar Consulta</h2>
+
+<form asp-action="Agendar" method="post" class="container mt-4">
+    <div class="mb-3">
+        <label asp-for="Consulta.ClienteId" class="form-label">Cliente</label>
+        <select asp-for="Consulta.ClienteId" asp-items="Model.Clientes" class="form-select" required></select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Consulta.AnimalId" class="form-label">Animal</label>
+        <select asp-for="Consulta.AnimalId" asp-items="Model.Animais" class="form-select" required></select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Consulta.DataHora" class="form-label">Data e Hora</label>
+        <input asp-for="Consulta.DataHora" type="datetime-local" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Consulta.Descricao" class="form-label">Descrição</label>
+        <textarea asp-for="Consulta.Descricao" class="form-control" rows="4"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Agendar</button>
+</form>

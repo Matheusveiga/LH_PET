@@ -16,5 +16,7 @@ namespace LH_PET.Context
 
         public DbSet<User> Users { get; set; } = null!;
 
+        public DbSet<Consulta> Consultas { get; set; } = null!;
+
     }
 }

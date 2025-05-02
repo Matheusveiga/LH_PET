@@ -25,7 +25,7 @@ namespace LH_PET.Models
 
         public DateTime DataCadastro { get; set; } = DateTime.Now;
 
-        public ICollection<Animal> Animais { get; set; }
+        public required ICollection<Animal> Animais { get; set; }
 
     }
 }

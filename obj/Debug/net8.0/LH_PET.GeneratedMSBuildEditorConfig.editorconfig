@@ -52,6 +52,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFkb3NDbGllbnRlL0RldGFsaGVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/matheus/Área de trabalho/LH_PET/Views/DadosConsulta/Agendar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFkb3NDb25zdWx0YS9BZ2VuZGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/matheus/Área de trabalho/LH_PET/Views/DadosConsulta/Consulta.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFkb3NDb25zdWx0YS9Db25zdWx0YS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/matheus/Área de trabalho/LH_PET/Views/DadosFornecedor/BuscarFornecedor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFkb3NGb3JuZWNlZG9yL0J1c2NhckZvcm5lY2Vkb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
