@@ -1,4 +1,4 @@
-@model LH_PET.Models.ConsultaViewModel
+@model LH_PET.Models.Consulta
 
 @{
     ViewData["Title"] = "Agendar Consulta";
@@ -7,25 +7,96 @@
 <h2 class="text-center mt-4">Agendar Consulta</h2>
 
 <form asp-action="Agendar" method="post" class="container mt-4">
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+
     <div class="mb-3">
-        <label asp-for="Consulta.ClienteId" class="form-label">Cliente</label>
-        <select asp-for="Consulta.ClienteId" asp-items="Model.Clientes" class="form-select" required></select>
+        <label class="form-label">Cliente</label>
+        <input list="listaClientes" id="inputCliente" class="form-control" placeholder="Digite o nome do cliente..."
+            autocomplete="off" />
+        <datalist id="listaClientes"></datalist>
+        <input type="hidden" asp-for="ClienteID" id="hiddenClienteID" />
+        <span asp-validation-for="ClienteID" class="text-danger"></span> <!-- Validação específica -->
     </div>
 
     <div class="mb-3">
-        <label asp-for="Consulta.AnimalId" class="form-label">Animal</label>
-        <select asp-for="Consulta.AnimalId" asp-items="Model.Animais" class="form-select" required></select>
+        <label class="form-label">Animal</label>
+        <input list="listaAnimais" id="inputAnimal" class="form-control" placeholder="Digite o nome do animal..."
+            autocomplete="off" />
+        <datalist id="listaAnimais"></datalist>
+        <input type="hidden" asp-for="AnimalID" id="hiddenAnimalID" />
+        <span asp-validation-for="AnimalID" class="text-danger"></span> <!-- Validação específica -->
+    </div>
+    <div class="mb-3">
+        <label asp-for="DataHora" class="form-label">Data e Hora</label>
+        <input asp-for="DataHora" type="datetime-local" class="form-control" required />
     </div>
 
     <div class="mb-3">
-        <label asp-for="Consulta.DataHora" class="form-label">Data e Hora</label>
-        <input asp-for="Consulta.DataHora" type="datetime-local" class="form-control" required />
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Consulta.Descricao" class="form-label">Descrição</label>
-        <textarea asp-for="Consulta.Descricao" class="form-control" rows="4"></textarea>
+        <label asp-for="Descricao" class="form-label">Descrição</label>
+        <textarea asp-for="Descricao" class="form-control" rows="4"></textarea>
     </div>
 
     <button type="submit" class="btn btn-success">Agendar</button>
 </form>
+
+
+<script>
+    // Busca clientes ao digitar
+    document.getElementById('inputCliente').addEventListener('input', async function (e) {
+        const query = e.target.value.trim();
+        if (query.length < 2) return;
+
+        const response = await fetch(`/DadosConsulta/BuscarClientes?term=${encodeURIComponent(query)}`);
+        const clientes = await response.json();
+
+        const datalist = document.getElementById('listaClientes');
+        datalist.innerHTML = clientes.map(cliente =>
+            `<option value="${cliente.nome}" data-id="${cliente.clienteID}"></option>`
+        ).join('');
+    });
+
+
+    document.getElementById('inputCliente').addEventListener('change', function (e) {
+        const option = document.querySelector(`#listaClientes option[value="${e.target.value}"]`);
+        document.getElementById('hiddenClienteID').value = option?.dataset.id || "";
+    });
+
+    // Busca animais ao digitar (similar ao de clientes)
+    document.getElementById('inputAnimal').addEventListener('input', async function (e) {
+        const query = e.target.value.trim();
+        if (query.length < 2) return;
+
+        const response = await fetch(`/DadosConsulta/BuscarAnimais?term=${encodeURIComponent(query)}`);
+        const animais = await response.json();
+
+        const datalist = document.getElementById('listaAnimais');
+        datalist.innerHTML = animais.map(animal =>
+            `<option value="${animal.nome}" data-id="${animal.animalID}"></option>`
+        ).join('');
+    });
+
+    // Atualiza o hidden AnimalID quando um animal é selecionado
+    document.getElementById('inputAnimal').addEventListener('change', function (e) {
+        const option = document.querySelector(`#listaAnimais option[value="${e.target.value}"]`);
+        document.getElementById('hiddenAnimalID').value = option?.dataset.id || "";
+    });
+
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const clienteID = document.getElementById('hiddenClienteID').value;
+        const animalID = document.getElementById('hiddenAnimalID').value;
+
+        if (!clienteID || !animalID) {
+            e.preventDefault();
+            alert("Selecione um cliente e animal válidos!");
+        }
+    });
+
+</script>

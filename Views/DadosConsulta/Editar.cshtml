@@ -1,0 +1,109 @@
+@model LH_PET.Models.Consulta
+
+@{
+    ViewData["Title"] = "Editar Consulta";
+}
+
+<h2 class="text-center mt-4">Editar Consulta</h2>
+
+<form asp-action="Editar" method="post" class="container mt-4">
+    <input type="hidden" asp-for="Id" />
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+
+    <div class="mb-3">
+        <label class="form-label">Cliente</label>
+        <input list="listaClientes" id="inputCliente" class="form-control" 
+               placeholder="Digite o nome do cliente..." value="@Model.Cliente.Nome"
+               autocomplete="off" />
+        <datalist id="listaClientes"></datalist>
+        <input type="hidden" asp-for="ClienteID" id="hiddenClienteID" />
+        <span asp-validation-for="ClienteID" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Animal</label>
+        <input list="listaAnimais" id="inputAnimal" class="form-control" 
+               placeholder="Digite o nome do animal..." value="@Model.Animal.Nome"
+               autocomplete="off" />
+        <datalist id="listaAnimais"></datalist>
+        <input type="hidden" asp-for="AnimalID" id="hiddenAnimalID" />
+        <span asp-validation-for="AnimalID" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DataHora" class="form-label">Data e Hora</label>
+        <input asp-for="DataHora" type="datetime-local" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Descricao" class="form-label">Descrição</label>
+        <textarea asp-for="Descricao" class="form-control" rows="4"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+    <a asp-action="Consulta" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    <script>
+        // Busca clientes (mesmo código da view Agendar)
+        document.getElementById('inputCliente').addEventListener('input', async function (e) {
+            const query = e.target.value.trim();
+            if (query.length < 2) return;
+
+            const response = await fetch(`/DadosConsulta/BuscarClientes?term=${encodeURIComponent(query)}`);
+            const clientes = await response.json();
+
+            const datalist = document.getElementById('listaClientes');
+            datalist.innerHTML = clientes.map(cliente =>
+                `<option value="${cliente.nome}" data-id="${cliente.clienteID}"></option>`
+            ).join('');
+        });
+
+        // Busca animais (mesmo código da view Agendar)
+        document.getElementById('inputAnimal').addEventListener('input', async function (e) {
+            const query = e.target.value.trim();
+            if (query.length < 2) return;
+
+            const response = await fetch(`/DadosConsulta/BuscarAnimais?term=${encodeURIComponent(query)}`);
+            const animais = await response.json();
+
+            const datalist = document.getElementById('listaAnimais');
+            datalist.innerHTML = animais.map(animal =>
+                `<option value="${animal.nome}" data-id="${animal.animalID}"></option>`
+            ).join('');
+        });
+
+        // Preenche os campos com os valores atuais ao carregar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            // Define o ID do cliente
+            document.getElementById('hiddenClienteID').value = '@Model.ClienteID';
+            
+            // Busca o nome do cliente pelo ID
+            fetch(`/DadosConsulta/BuscarClientePorId?id=@Model.ClienteID`)
+                .then(response => response.json())
+                .then(cliente => {
+                    document.getElementById('inputCliente').value = cliente.nome;
+                });
+
+            // Define o ID do animal
+            document.getElementById('hiddenAnimalID').value = '@Model.AnimalID';
+
+            // Busca o nome do animal pelo ID
+            fetch(`/DadosConsulta/BuscarAnimalPorId?id=@Model.AnimalID`)
+                .then(response => response.json())
+                .then(animal => {
+                    document.getElementById('inputAnimal').value = animal.nome;
+                });
+        });
+    </script>
+}

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace LH_PET.Models
 {
@@ -10,18 +11,21 @@ namespace LH_PET.Models
         public int Id { get; set; }
 
         [Required]
-        public int ClienteId { get; set; }
-        
-        [ForeignKey("ClienteId")]
+        public int ClienteID { get; set; }
+
+        [ForeignKey("ClienteID")]
+        [ValidateNever]
         public Cliente Cliente { get; set; }
 
         [Required]
-        public int AnimalId { get; set; }
+        public int AnimalID { get; set; }
 
-        [ForeignKey("AnimalId")]
+        [ForeignKey("AnimalID")]
+        [ValidateNever]
         public Animal Animal { get; set; }
 
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTime DataHora { get; set; }
 
         public string? Descricao { get; set; }

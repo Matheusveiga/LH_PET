@@ -17,53 +17,47 @@ namespace LH_PET.Controllers
             _context = context;
         }
 
-        // Exibir o formulário para agendar uma consulta
+
         [HttpGet]
         public async Task<IActionResult> Agendar()
         {
-            // Obtendo os dados de clientes e animais do banco de dados
-            var clientes = await _context.Clientes.ToListAsync();
-            var animais = await _context.Animais.ToListAsync();
 
-            if (clientes == null || animais == null)
-            {
-                return NotFound("Clientes ou Animais não encontrados.");
-            }
+            var clientes = await _context.Clientes.ToListAsync() ?? new List<Cliente>();
+            var animais = await _context.Animais.ToListAsync() ?? new List<Animal>();
 
-            // Criando o ViewModel e preenchendo as listas de clientes e animais
-            var viewModel = new ConsultaViewModel
-            {
-                Clientes = new SelectList(clientes, "Id", "Nome"),
-                Animais = new SelectList(animais, "Id", "Nome")
-            };
 
-            // Retornando a view com o ViewModel preenchido
-            return View(viewModel);
+            if (clientes.Count == 0) ModelState.AddModelError(string.Empty, "Não há clientes cadastrados.");
+            if (animais.Count == 0) ModelState.AddModelError(string.Empty, "Não há animais cadastrados.");
+
+            ViewBag.Clientes = new SelectList(clientes, "ClienteID", "Nome"); // Use o nome correto da propriedade (ClienteID)
+            ViewBag.Animais = new SelectList(animais, "AnimalID", "Nome"); // Use o nome correto da propriedade (AnimalID)
+
+            return View();
         }
+
 
 
         [HttpPost]
-        public async Task<IActionResult> Agendar(ConsultaViewModel viewModel)
+        public async Task<IActionResult> Agendar(Consulta consulta)
         {
             if (ModelState.IsValid)
             {
-                if (viewModel.Consulta == null)
+                try
                 {
-                    viewModel.Consulta = new Consulta();
+                    _context.Consultas.Add(consulta);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Consulta");
                 }
-
-                await _context.Consultas.AddAsync(viewModel.Consulta);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Consulta");
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", $"Erro ao salvar: {ex.Message}");
+                }
             }
 
-            viewModel.Clientes = new SelectList(await _context.Clientes.ToListAsync(), "Id", "Nome", viewModel.Consulta?.ClienteId);
-            viewModel.Animais = new SelectList(await _context.Animais.ToListAsync(), "Id", "Nome", viewModel.Consulta?.AnimalId);
-
-            return View(viewModel);
+            return View(consulta);
         }
-    // Listar todas as consultas agendadas
-    [HttpGet]
+        // Listar todas as consultas agendadas
+        [HttpGet]
         public async Task<ActionResult> Consulta()
         {
             // Incluir clientes e animais para mostrar na listagem
@@ -74,5 +68,114 @@ namespace LH_PET.Controllers
 
             return View(consultas);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> BuscarClientes(string term)
+        {
+            var clientes = await _context.Clientes
+                .Where(c => c.Nome.Contains(term))
+                .Select(c => new { clienteID = c.ClienteID, nome = c.Nome })
+                .ToListAsync();
+
+            return Json(clientes);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> BuscarAnimais(string term)
+        {
+            var animais = await _context.Animais
+                .Where(a => a.Nome.Contains(term))
+                .Select(a => new { animalID = a.AnimalID, nome = a.Nome })
+                .ToListAsync();
+
+            return Json(animais);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Editar(int id)
+        {
+            var consulta = await _context.Consultas
+                .Include(c => c.Cliente)
+                .Include(c => c.Animal)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (consulta == null)
+            {
+                return NotFound();
+            }
+
+            return View(consulta);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Editar(int id, Consulta consulta)
+        {
+            if (id != consulta.Id)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(consulta);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Consulta");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", $"Erro ao salvar: {ex.Message}");
+                }
+            }
+
+            return View(consulta);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> BuscarClientePorId(int id)
+        {
+            var cliente = await _context.Clientes
+                .Where(c => c.ClienteID == id)
+                .Select(c => new { clienteID = c.ClienteID, nome = c.Nome })
+                .FirstOrDefaultAsync();
+
+            return Json(cliente);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> BuscarAnimalPorId(int id)
+        {
+            var animal = await _context.Animais
+                .Where(a => a.AnimalID == id)
+                .Select(a => new { animalID = a.AnimalID, nome = a.Nome })
+                .FirstOrDefaultAsync();
+
+            return Json(animal);
+        }
+
+        private bool ConsultaExists(int id)
+        {
+            return _context.Consultas.Any(e => e.Id == id);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Excluir(int id)
+        {
+            var consulta = await _context.Consultas.FindAsync(id);
+            if (consulta == null)
+            {
+                return NotFound();
+            }
+
+            _context.Consultas.Remove(consulta);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Consulta");
+        }
+
     }
+
+
+
+
 }
