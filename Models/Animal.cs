@@ -35,7 +35,7 @@ namespace LH_PET.Models
         public int ClienteID { get; set; } // Chave estrangeira
         
         [ValidateNever]
-        public Cliente Cliente { get; set; } // Navegação
+        public required Cliente Cliente { get; set; } // Navegação
 
     }
 }
