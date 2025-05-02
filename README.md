@@ -62,9 +62,10 @@ O **LH_PET** é um sistema web desenvolvido em ASP.NET MVC voltado para a gestã
 - [x] Relacionamento entre cliente e animais
 - [x] Cadastro, consulta, edição e exclusão de animais
 - [x] Visualização dos animais de um cliente
-- [ ] Criação e controle de prontuários
-- [ ] Autenticação e login (em desenvolvimento)
-- [ ] Responsividade para dispositivos móveis
+- [X] Autenticação e login
+- [X] Responsividade para dispositivos móveis
+- [X] Agendamento de consultas
+- [ ]  Criação e controle de prontuários
 
 ---
 
