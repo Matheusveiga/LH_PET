@@ -75,19 +75,39 @@ O **LH_PET** é um sistema web desenvolvido em ASP.NET MVC voltado para a gestã
 
 ```bash
 git clone https://github.com/Matheusveiga/LH_PET.git
+```
 
-2. Abra o projeto no Visual Studio 2022 (ou superior)
+Recomendações para rodar no Codespaces / local:
 
-3. Restaure os pacotes NuGet
+1. Restaurar e buildar:
 
-4. Configure a string de conexão com o banco no appsettings.json
+```bash
+dotnet restore
+dotnet build
+```
 
-5. Execute o projeto (Ctrl + F5)
+2. Criar banco MySQL e executar o script de schema (arquivo `sql/create_schema.sql`):
 
+```bash
+# se tiver mysql instalado
+mysql -u root -p < sql/create_schema.sql
 
-🧠 Objetivo do Projeto
+# ou usando um container docker MySQL
+docker run --name lh-mysql -e MYSQL_ROOT_PASSWORD=Matheus@123 -p 3306:3306 -d mysql:8
+# espere iniciar e então rode:
+docker exec -i lh-mysql mysql -u root -pMatheus@123 < sql/create_schema.sql
+```
 
-Este sistema faz parte de um portfólio voltado à inserção profissional na área de desenvolvimento .NET.
-A ideia é simular uma aplicação real com práticas de CRUD, navegação entre páginas, reaproveitamento de componentes e aplicação de boas práticas com MVC.
+3. Ajuste `appsettings.Development.json` se necessário (connection string / jwt key)
+
+4. Rodar a aplicação:
+
+```bash
+dotnet run
+```
+
+Objetivo do Projeto
+
+Este sistema é um exemplo de aplicação ASP.NET MVC com EF Core, autenticação por cookie e JWT, e boas práticas básicas.
 
 

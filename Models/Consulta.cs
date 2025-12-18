@@ -15,14 +15,14 @@ namespace LH_PET.Models
 
         [ForeignKey("ClienteID")]
         [ValidateNever]
-        public Cliente Cliente { get; set; }
+        public Cliente? Cliente { get; set; }
 
         [Required]
         public int AnimalID { get; set; }
 
         [ForeignKey("AnimalID")]
         [ValidateNever]
-        public Animal Animal { get; set; }
+        public Animal? Animal { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]

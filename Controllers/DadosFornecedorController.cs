@@ -22,9 +22,9 @@ namespace LH_PET.Controllers
             {
                 busca = busca.ToLower();
 
-                resultado = _context.Fornecedores.Where(d => d.Nome.ToLower().Contains(busca) ||
-                d.CNPJ.ToLower().Contains(busca) ||
-                d.Email.ToLower().Contains(busca)).ToList();
+                resultado = _context.Fornecedores.Where(d => (d.Nome ?? string.Empty).ToLower().Contains(busca) ||
+                (d.CNPJ ?? string.Empty).ToLower().Contains(busca) ||
+                (d.Email ?? string.Empty).ToLower().Contains(busca)).ToList();
 
 
             }

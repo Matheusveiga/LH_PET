@@ -12,30 +12,30 @@ namespace LH_PET.Models
 
         [Required]
         [StringLength(80)]
-        public string? Nome { get; set; }
+        public string Nome { get; set; } = string.Empty;
 
         [Required]
         [StringLength(80)]
-        public string? Tipo { get; set; }
+        public string Tipo { get; set; } = string.Empty;
 
         [Required]
         [StringLength(80)]
-        public string? Sexo { get; set; }
+        public string Sexo { get; set; } = string.Empty;
 
         [Required]
         [StringLength(80)]
-        public string? Raca { get; set; }
+        public string Raca { get; set; } = string.Empty;
 
         [Required]
         [StringLength(80)]
-        public string? Idade { get; set; }
+        public string Idade { get; set; } = string.Empty;
 
         public DateTime DataCadastro { get; set; } = DateTime.Now;
 
         public int ClienteID { get; set; } // Chave estrangeira
         
         [ValidateNever]
-        public required Cliente Cliente { get; set; } // Navegação
+        public Cliente? Cliente { get; set; } // Navegação
 
     }
 }

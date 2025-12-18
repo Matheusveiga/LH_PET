@@ -21,8 +21,8 @@
 
     <div class="mb-3">
         <label class="form-label">Cliente</label>
-        <input list="listaClientes" id="inputCliente" class="form-control" 
-               placeholder="Digite o nome do cliente..." value="@Model.Cliente.Nome"
+         <input list="listaClientes" id="inputCliente" class="form-control" 
+             placeholder="Digite o nome do cliente..." value="@(Model.Cliente?.Nome ?? string.Empty)"
                autocomplete="off" />
         <datalist id="listaClientes"></datalist>
         <input type="hidden" asp-for="ClienteID" id="hiddenClienteID" />
@@ -31,8 +31,8 @@
 
     <div class="mb-3">
         <label class="form-label">Animal</label>
-        <input list="listaAnimais" id="inputAnimal" class="form-control" 
-               placeholder="Digite o nome do animal..." value="@Model.Animal.Nome"
+         <input list="listaAnimais" id="inputAnimal" class="form-control" 
+             placeholder="Digite o nome do animal..." value="@(Model.Animal?.Nome ?? string.Empty)"
                autocomplete="off" />
         <datalist id="listaAnimais"></datalist>
         <input type="hidden" asp-for="AnimalID" id="hiddenAnimalID" />
@@ -87,12 +87,12 @@
         window.addEventListener('DOMContentLoaded', () => {
             // Define o ID do cliente
             document.getElementById('hiddenClienteID').value = '@Model.ClienteID';
-            
+
             // Busca o nome do cliente pelo ID
             fetch(`/DadosConsulta/BuscarClientePorId?id=@Model.ClienteID`)
                 .then(response => response.json())
                 .then(cliente => {
-                    document.getElementById('inputCliente').value = cliente.nome;
+                    if (cliente && cliente.nome) document.getElementById('inputCliente').value = cliente.nome;
                 });
 
             // Define o ID do animal
@@ -102,7 +102,7 @@
             fetch(`/DadosConsulta/BuscarAnimalPorId?id=@Model.AnimalID`)
                 .then(response => response.json())
                 .then(animal => {
-                    document.getElementById('inputAnimal').value = animal.nome;
+                    if (animal && animal.nome) document.getElementById('inputAnimal').value = animal.nome;
                 });
         });
     </script>

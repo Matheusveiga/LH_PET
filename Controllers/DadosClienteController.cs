@@ -10,33 +10,27 @@ namespace LH_PET.Controllers
     public class DadosClienteController : Controller
     {
 
-        private readonly AppDbContext _context;
+        private readonly LH_PET.Services.IClienteService _clienteService;
 
-        public DadosClienteController(AppDbContext context)
+        public DadosClienteController(LH_PET.Services.IClienteService clienteService)
         {
-            _context = context;
+            _clienteService = clienteService;
         }
 
         [HttpGet]
-        public ActionResult Buscar(string busca)
+        public async Task<ActionResult> Buscar(string busca)
         {
             try
             {
                 if (string.IsNullOrWhiteSpace(busca))
                 {
-                    var todos = _context.Clientes.ToList();
+                    var todos = await _clienteService.GetAllAsync();
                     return View(todos);
                 }
 
                 busca = busca.ToLower();
 
-                var resultado = _context.Clientes
-                    .Where(c =>
-                        c.Nome.ToLower().Contains(busca) ||
-                        c.CPF.ToLower().Contains(busca) ||
-                        c.Email.ToLower().Contains(busca) ||
-                        c.DataCadastro.ToString().Contains(busca))
-                    .ToList();
+                var resultado = await _clienteService.SearchAsync(busca);
 
                 return View(resultado);
             }
@@ -54,7 +48,7 @@ namespace LH_PET.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Cliente cliente)
+        public async Task<IActionResult> Create(Cliente cliente)
         {
             try
             {
@@ -63,9 +57,7 @@ namespace LH_PET.Controllers
                     return View(cliente);
                 }
 
-
-                _context.Clientes.Add(cliente);
-                _context.SaveChanges();
+                await _clienteService.AddAsync(cliente);
 
                 return RedirectToAction("Buscar");
             }
@@ -78,12 +70,10 @@ namespace LH_PET.Controllers
         }
 
         [HttpGet]
-        public IActionResult Detalhes(int id)
+        public async Task<IActionResult> Detalhes(int id)
         {
             // Obtém o cliente com o ID fornecido, incluindo os animais
-            var cliente = _context.Clientes
-                .Include(c => c.Animais)  // Inclui os animais relacionados ao cliente
-                .FirstOrDefault(c => c.ClienteID == id);
+            var cliente = await _clienteService.GetByIdAsync(id);
 
             if (cliente == null)
             {

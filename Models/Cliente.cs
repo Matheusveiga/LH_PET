@@ -13,19 +13,19 @@ namespace LH_PET.Models
 
         [Required]
         [StringLength(80)]
-        public string? Nome { get; set; }
+        public string Nome { get; set; } = string.Empty;
 
         [Required]
         [StringLength(80)]
-        public string? CPF { get; set; }
+        public string CPF { get; set; } = string.Empty;
 
         [Required]
         [StringLength(80)]
-        public string? Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         public DateTime DataCadastro { get; set; } = DateTime.Now;
 
-        public required ICollection<Animal> Animais { get; set; }
+        public ICollection<Animal> Animais { get; set; } = new List<Animal>();
 
     }
 }

@@ -10,21 +10,23 @@ namespace LH_PET.Models
 
         [Required]
         [MaxLength(100)]
-        public string Username { get; set; }
+        public string Username { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "O Email é obrigatório.")]
         [EmailAddress(ErrorMessage = "Email inválido.")]
         [MaxLength(100)]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [Required]
         [MaxLength(255)]
-        public string PasswordHash { get; set; }
+        public string PasswordHash { get; set; } = string.Empty;
 
         [NotMapped]
-        [Compare("PasswordHash", ErrorMessage = "As senhas não coincidem.")]
-        public string ConfirmPassword { get; set; }
-        
+        [Compare("Password", ErrorMessage = "As senhas não coincidem.")]
+        public string ConfirmPassword { get; set; } = string.Empty;
+
+        [NotMapped]
+        public string Password { get; set; } = string.Empty;
 
         public DateTime DataCadastro { get; set; } = DateTime.Now;
 

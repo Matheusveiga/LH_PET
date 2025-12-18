@@ -7,6 +7,14 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">@TempData["Success"]</div>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">@TempData["Error"]</div>
+            }
             <form method="post" asp-action="Login" class="border p-4 rounded shadow-sm bg-light">
                 <div class="mb-3">
                     <label for="username" class="form-label">Nome de Usuário</label>

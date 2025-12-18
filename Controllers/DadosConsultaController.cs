@@ -10,11 +10,15 @@ namespace LH_PET.Controllers
     [Authorize]
     public class DadosConsultaController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly LH_PET.Services.IConsultaService _consultaService;
+        private readonly LH_PET.Services.IClienteService _clienteService;
+        private readonly LH_PET.Services.IAnimalService _animalService;
 
-        public DadosConsultaController(AppDbContext context)
+        public DadosConsultaController(LH_PET.Services.IConsultaService consultaService, LH_PET.Services.IClienteService clienteService, LH_PET.Services.IAnimalService animalService)
         {
-            _context = context;
+            _consultaService = consultaService;
+            _clienteService = clienteService;
+            _animalService = animalService;
         }
 
 
@@ -22,8 +26,8 @@ namespace LH_PET.Controllers
         public async Task<IActionResult> Agendar()
         {
 
-            var clientes = await _context.Clientes.ToListAsync() ?? new List<Cliente>();
-            var animais = await _context.Animais.ToListAsync() ?? new List<Animal>();
+            var clientes = await _clienteService.GetAllAsync() ?? new List<Cliente>();
+            var animais = await _animalService.GetAllAsync() ?? new List<Animal>();
 
 
             if (clientes.Count == 0) ModelState.AddModelError(string.Empty, "Não há clientes cadastrados.");
@@ -44,8 +48,7 @@ namespace LH_PET.Controllers
             {
                 try
                 {
-                    _context.Consultas.Add(consulta);
-                    await _context.SaveChangesAsync();
+                    await _consultaService.AddAsync(consulta);
                     return RedirectToAction("Consulta");
                 }
                 catch (Exception ex)
@@ -61,10 +64,7 @@ namespace LH_PET.Controllers
         public async Task<ActionResult> Consulta()
         {
             // Incluir clientes e animais para mostrar na listagem
-            var consultas = await _context.Consultas
-                .Include(c => c.Cliente)
-                .Include(c => c.Animal)
-                .ToListAsync();
+            var consultas = await _consultaService.GetAllAsync();
 
             return View(consultas);
         }
@@ -72,32 +72,22 @@ namespace LH_PET.Controllers
         [HttpGet]
         public async Task<IActionResult> BuscarClientes(string term)
         {
-            var clientes = await _context.Clientes
-                .Where(c => c.Nome.Contains(term))
-                .Select(c => new { clienteID = c.ClienteID, nome = c.Nome })
-                .ToListAsync();
-
+            var clientes = await _clienteService.SearchNamesAsync(term);
             return Json(clientes);
         }
 
         [HttpGet]
         public async Task<IActionResult> BuscarAnimais(string term)
         {
-            var animais = await _context.Animais
-                .Where(a => a.Nome.Contains(term))
-                .Select(a => new { animalID = a.AnimalID, nome = a.Nome })
-                .ToListAsync();
-
-            return Json(animais);
+            var animais = await _animalService.SearchAsync(term);
+            var list = animais.Select(a => new { animalID = a.AnimalID, nome = a.Nome }).ToList();
+            return Json(list);
         }
 
         [HttpGet]
         public async Task<IActionResult> Editar(int id)
         {
-            var consulta = await _context.Consultas
-                .Include(c => c.Cliente)
-                .Include(c => c.Animal)
-                .FirstOrDefaultAsync(c => c.Id == id);
+            var consulta = await _consultaService.GetByIdAsync(id);
 
             if (consulta == null)
             {
@@ -118,8 +108,7 @@ namespace LH_PET.Controllers
             {
                 try
                 {
-                    _context.Update(consulta);
-                    await _context.SaveChangesAsync();
+                    await _consultaService.UpdateAsync(consulta);
                     return RedirectToAction("Consulta");
                 }
                 catch (Exception ex)
@@ -134,42 +123,28 @@ namespace LH_PET.Controllers
         [HttpGet]
         public async Task<IActionResult> BuscarClientePorId(int id)
         {
-            var cliente = await _context.Clientes
-                .Where(c => c.ClienteID == id)
-                .Select(c => new { clienteID = c.ClienteID, nome = c.Nome })
-                .FirstOrDefaultAsync();
-
-            return Json(cliente);
+            var cliente = await _clienteService.GetByIdAsync(id);
+            if (cliente == null) return Json(null);
+            return Json(new { clienteID = cliente.ClienteID, nome = cliente.Nome });
         }
 
         [HttpGet]
         public async Task<IActionResult> BuscarAnimalPorId(int id)
         {
-            var animal = await _context.Animais
-                .Where(a => a.AnimalID == id)
-                .Select(a => new { animalID = a.AnimalID, nome = a.Nome })
-                .FirstOrDefaultAsync();
-
-            return Json(animal);
+            var animal = await _animalService.GetByIdAsync(id);
+            if (animal == null) return Json(null);
+            return Json(new { animalID = animal.AnimalID, nome = animal.Nome });
         }
 
         private bool ConsultaExists(int id)
         {
-            return _context.Consultas.Any(e => e.Id == id);
+            return false;
         }
 
         [HttpDelete]
         public async Task<IActionResult> Excluir(int id)
         {
-            var consulta = await _context.Consultas.FindAsync(id);
-            if (consulta == null)
-            {
-                return NotFound();
-            }
-
-            _context.Consultas.Remove(consulta);
-            await _context.SaveChangesAsync();
-
+            await _consultaService.RemoveAsync(id);
             return RedirectToAction("Consulta");
         }
 

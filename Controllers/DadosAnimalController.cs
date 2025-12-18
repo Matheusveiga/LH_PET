@@ -10,24 +10,23 @@ namespace LH_PET.Controllers
     [Authorize]
     public class DadosAnimalController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly LH_PET.Services.IAnimalService _animalService;
+        private readonly LH_PET.Services.IClienteService _clienteService;
 
-        public DadosAnimalController(AppDbContext context)
+        public DadosAnimalController(LH_PET.Services.IAnimalService animalService, LH_PET.Services.IClienteService clienteService)
         {
-            _context = context;
+            _animalService = animalService;
+            _clienteService = clienteService;
         }
 
         public async Task<ActionResult> BuscarAnimalAsync(string busca)
         {
-            var resultado = await _context.Animais.ToListAsync();
+            var resultado = await _animalService.GetAllAsync();
             if (!string.IsNullOrEmpty(busca))
             {
                 busca = busca.ToLower();
 
-                resultado = await _context.Animais.Where(c => c.Nome.ToLower().Contains(busca) ||
-                c.Tipo.ToLower().Contains(busca) ||
-                c.Raca.ToLower().Contains(busca) ||
-                c.Idade.ToLower().Contains(busca)).ToListAsync();
+                resultado = await _animalService.SearchAsync(busca);
 
 
             }
@@ -38,10 +37,7 @@ namespace LH_PET.Controllers
         [HttpGet]
         public async Task<JsonResult> BuscarClientesAsync(string termo)
         {
-            var nomes = await _context.Clientes
-                .Where(c => c.Nome.ToLower().Contains(termo.ToLower()))
-                .Select(c => new { id = c.ClienteID, nome = c.Nome })
-                .ToListAsync();
+            var nomes = await _clienteService.SearchNamesAsync(termo);
 
             return Json(nomes);
         }
@@ -69,8 +65,7 @@ namespace LH_PET.Controllers
                 }
 
 
-                await _context.Animais.AddAsync(animais);
-                await _context.SaveChangesAsync();
+                await _animalService.AddAsync(animais);
 
                 return RedirectToAction("BuscarAnimal");
             }
@@ -85,9 +80,7 @@ namespace LH_PET.Controllers
         [HttpGet]
         public async Task<ActionResult> DetalhesAsync(int id)
         {
-            var cliente = await _context.Clientes
-                .Include(c => c.Animais) 
-                .FirstOrDefaultAsync(c => c.ClienteID == id);
+            var cliente = await _clienteService.GetByIdAsync(id);
 
             if (cliente == null)
             {
@@ -100,7 +93,7 @@ namespace LH_PET.Controllers
         [HttpGet]
         public async Task<ActionResult> EditarAnimalAsync(int id)
         {
-            var animal = await _context.Animais.FindAsync(id);
+            var animal = await _animalService.GetByIdAsync(id);
             if (animal == null)
             {
                 return NotFound();
@@ -117,8 +110,7 @@ namespace LH_PET.Controllers
                 return View(animal);
             }
 
-            _context.Animais.Update(animal);
-            await _context.SaveChangesAsync();
+            await _animalService.UpdateAsync(animal);
 
             return RedirectToAction("Detalhes", "DadosAnimal", new { id = animal.ClienteID });
         }
@@ -126,7 +118,7 @@ namespace LH_PET.Controllers
         [HttpGet]
         public async Task<ActionResult> ExcluirAnimalAsync(int id)
         {
-            var animal = await _context.Animais.FindAsync(id);
+            var animal = await _animalService.GetByIdAsync(id);
             if (animal == null)
             {
                 return NotFound();
@@ -134,8 +126,7 @@ namespace LH_PET.Controllers
 
             int clienteId = animal.ClienteID;
 
-            _context.Animais.Remove(animal);
-            await _context.SaveChangesAsync();
+            await _animalService.RemoveAsync(id);
 
             return RedirectToAction("Detalhes", new { id = clienteId });
         }
