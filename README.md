@@ -47,12 +47,14 @@ O **LH_PET** é um sistema web desenvolvido em ASP.NET MVC voltado para a gestã
 
 ## ⚙️ Tecnologias Utilizadas
 
-- ASP.NET MVC (.NET 6)
+- ASP.NET MVC (.NET 8.0)
 - C#
 - Entity Framework
 - Razor Pages
 - SQL Server (LocalDB)
 - Bootstrap
+- JWT Tokens
+- BCrypt
 
 ---
 
