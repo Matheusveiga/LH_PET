@@ -1,8 +1,458 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Bem Vindo ao Sistema LH-PET</h1>
-    <p>Para navegar entre os modulos do sistema, basta escolher a opção no menu acima. </p>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.45.1/dist/apexcharts.min.js"></script>
+
+<style>
+    .dashboard-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-header h1 {
+        margin: 0;
+        font-weight: 700;
+        font-size: 2.5em;
+    }
+
+    .dashboard-header p {
+        margin: 5px 0 0 0;
+        opacity: 0.9;
+    }
+
+    .stat-card {
+        background: white;
+        border: none;
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        transform: translateY(-5px);
+    }
+
+    .stat-card .number {
+        font-size: 2.5em;
+        font-weight: 700;
+        margin: 10px 0;
+    }
+
+    .stat-card .label {
+        color: #666;
+        font-size: 0.95em;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .stat-card .icon {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        opacity: 0.7;
+    }
+
+    .stat-card.clientes .icon { color: #667eea; }
+    .stat-card.animais .icon { color: #f093fb; }
+    .stat-card.consultas .icon { color: #4facfe; }
+    .stat-card.fornecedores .icon { color: #43e97b; }
+
+    .chart-card {
+        background: white;
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .chart-card h5 {
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #333;
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 10px;
+    }
+
+    .table-card {
+        background: white;
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .table-card h5 {
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #333;
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 10px;
+    }
+
+    .badge-today {
+        background: #ff6b6b;
+        color: white;
+    }
+
+    .badge-soon {
+        background: #ffd93d;
+        color: #333;
+    }
+
+    .badge-future {
+        background: #667eea;
+        color: white;
+    }
+
+    .recent-date {
+        font-size: 0.85em;
+        color: #999;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px;
+        color: #999;
+    }
+
+    .empty-state i {
+        font-size: 3em;
+        margin-bottom: 10px;
+        opacity: 0.5;
+    }
+
+    @@media (max-width: 768px) {
+        .dashboard-header {
+            padding: 20px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 1.8em;
+        }
+
+        .stat-card .number {
+            font-size: 2em;
+        }
+
+        .stat-card .icon {
+            font-size: 2em;
+        }
+    }
+</style>
+
+<div class="dashboard-header">
+    <h1>📊 Dashboard</h1>
+    <p>Bem-vindo ao painel de controle da clínica veterinária</p>
 </div>
+
+<!-- Cards de Estatísticas -->
+<div class="row">
+    <div class="col-md-6 col-lg-3">
+        <div class="stat-card clientes">
+            <div class="icon">👥</div>
+            <div class="label">Clientes</div>
+            <div class="number">@Model.TotalClientes</div>
+            <small class="text-muted">Cadastrados no sistema</small>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+        <div class="stat-card animais">
+            <div class="icon">🐾</div>
+            <div class="label">Animais</div>
+            <div class="number">@Model.TotalAnimais</div>
+            <small class="text-muted">Registrados</small>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+        <div class="stat-card consultas">
+            <div class="icon">📅</div>
+            <div class="label">Consultas</div>
+            <div class="number">@Model.TotalConsultas</div>
+            <small class="text-muted">Agendadas</small>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+        <div class="stat-card fornecedores">
+            <div class="icon">🏢</div>
+            <div class="label">Fornecedores</div>
+            <div class="number">@Model.TotalFornecedores</div>
+            <small class="text-muted">Cadastrados</small>
+        </div>
+    </div>
+</div>
+
+<!-- Gráficos -->
+<div class="row mt-4">
+    <div class="col-lg-6">
+        <div class="chart-card">
+            <h5>Animais por Tipo</h5>
+            <div id="chartAnimaisPorTipo"></div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="chart-card">
+            <h5>Consultas por Tipo</h5>
+            <div id="chartConsultasPorTipo"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Próximas Consultas -->
+<div class="row mt-4">
+    <div class="col-lg-6">
+        <div class="table-card">
+            <h5>📅 Próximas Consultas</h5>
+            @if (Model.ProximasConsultas.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th>Data/Hora</th>
+                                <th>Animal</th>
+                                <th>Cliente</th>
+                                <th>Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var consulta in Model.ProximasConsultas)
+                            {
+                                <tr>
+                                    <td>
+                                        @consulta.DataHora.ToString("dd/MM HH:mm")
+                                        <span class="badge badge-@consulta.StatusCss ms-2">
+                                            @if (consulta.StatusCss == "danger") { <text>Hoje</text> }
+                                            else if (consulta.StatusCss == "warning") { <text>Em breve</text> }
+                                            else { <text>Agendada</text> }
+                                        </span>
+                                    </td>
+                                    <td>@consulta.NomeAnimal</td>
+                                    <td>@consulta.NomeCliente</td>
+                                    <td>
+                                        <small class="text-muted">@consulta.Descricao</small>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <a href="@Url.Action("Agendar", "DadosConsulta")" class="btn btn-sm btn-primary mt-3">
+                    + Agendar Consulta
+                </a>
+            }
+            else
+            {
+                <div class="empty-state">
+                    <p>Nenhuma consulta agendada</p>
+                    <a href="@Url.Action("Agendar", "DadosConsulta")" class="btn btn-primary mt-3">
+                        Agendar Primeira Consulta
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Animais Recentes -->
+    <div class="col-lg-6">
+        <div class="table-card">
+            <h5>🐾 Animais Recentes</h5>
+            @if (Model.AnimaisRecentes.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Tipo</th>
+                                <th>Cliente</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var animal in Model.AnimaisRecentes)
+                            {
+                                <tr>
+                                    <td><strong>@animal.Nome</strong></td>
+                                    <td>@animal.Tipo (@animal.Raca)</td>
+                                    <td>@animal.NomeCliente</td>
+                                    <td>
+                                        <small class="recent-date">@animal.DataCadastro.ToString("dd/MM/yyyy")</small>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <a href="@Url.Action("BuscarAnimal", "DadosAnimal")" class="btn btn-sm btn-outline-primary mt-3">
+                    Ver Todos os Animais
+                </a>
+            }
+            else
+            {
+                <div class="empty-state">
+                    <p>Nenhum animal cadastrado</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Clientes Recentes -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="table-card">
+            <h5>👥 Clientes Recentes</h5>
+            @if (Model.ClientesRecentes.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Animais</th>
+                                <th>Data Cadastro</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var cliente in Model.ClientesRecentes)
+                            {
+                                <tr>
+                                    <td><strong>@cliente.Nome</strong></td>
+                                    <td>
+                                        <small>@cliente.Email</small>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-info">@cliente.QuantidadeAnimais</span>
+                                    </td>
+                                    <td>
+                                        <small class="recent-date">@cliente.DataCadastro.ToString("dd/MM/yyyy")</small>
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Detalhes", "DadosCliente", new { id = cliente.Id })" 
+                                           class="btn btn-sm btn-outline-primary">
+                                            Ver
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <a href="@Url.Action("Buscar", "DadosCliente")" class="btn btn-sm btn-outline-primary mt-3">
+                    Ver Todos os Clientes
+                </a>
+            }
+            else
+            {
+                <div class="empty-state">
+                    <p>Nenhum cliente cadastrado</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Scripts para os gráficos -->
+<script>
+    // Gráfico: Animais por Tipo
+    @if (Model.TiposAnimais.Any())
+    {
+        <text>
+        var chartAnimais = {
+            series: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.QuantidadesPorTipo)),
+            labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.TiposAnimais)),
+            chart: { type: 'donut' },
+            colors: ['#667eea', '#f093fb', '#4facfe', '#43e97b', '#fa709a', '#feca57'],
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: '65%',
+                        labels: {
+                            show: true,
+                            name: {
+                                show: true,
+                                fontSize: '14px'
+                            },
+                            value: {
+                                show: true,
+                                fontSize: '18px',
+                                fontWeight: 600
+                            }
+                        }
+                    }
+                }
+            },
+            legend: {
+                position: 'bottom',
+                fontSize: '12px'
+            }
+        };
+        new ApexCharts(document.querySelector("#chartAnimaisPorTipo"), chartAnimais).render();
+        </text>
+    }
+
+    // Gráfico: Consultas por Tipo
+    @if (Model.TiposConsulta.Any())
+    {
+        <text>
+        var chartConsultas = {
+            series: [{
+                name: 'Quantidade',
+                data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.QuantidadesConsultaPorTipo))
+            }],
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            colors: ['#667eea'],
+            xaxis: {
+                categories: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.TiposConsulta)),
+                labels: {
+                    rotate: -45,
+                    rotateAlways: true,
+                    maxHeight: 150
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'Quantidade'
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    distributed: true,
+                    dataLabels: {
+                        position: 'top'
+                    }
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                offsetY: -25,
+                style: {
+                    colors: ['#667eea'],
+                    fontWeight: 600
+                }
+            }
+        };
+        new ApexCharts(document.querySelector("#chartConsultasPorTipo"), chartConsultas).render();
+        </text>
+    }
+</script>
