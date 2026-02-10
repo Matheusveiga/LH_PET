@@ -136,11 +136,6 @@ namespace LH_PET.Controllers
             return Json(new { animalID = animal.AnimalID, nome = animal.Nome });
         }
 
-        private bool ConsultaExists(int id)
-        {
-            return false;
-        }
-
         [HttpDelete]
         public async Task<IActionResult> Excluir(int id)
         {

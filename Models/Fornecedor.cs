@@ -9,21 +9,20 @@ namespace LH_PET.Models
         [Key]
         public int FornecedorID { get; set; }
 
-        [Required]
-        [StringLength(80)]
+        [Required(ErrorMessage = "Nome é obrigatório")]
+        [StringLength(80, ErrorMessage = "Nome não pode ter mais de 80 caracteres")]
         public string? Nome { get; set; }
 
-        [Required]
-        [StringLength(80)]
+        [Required(ErrorMessage = "CNPJ é obrigatório")]
+        [StringLength(18, ErrorMessage = "CNPJ inválido")]
+        [ValidateCNPJ]
         public string? CNPJ { get; set; }
 
-        [Required]
-        [StringLength(80)]
+        [Required(ErrorMessage = "Email é obrigatório")]
+        [EmailAddress(ErrorMessage = "Email inválido")]
+        [StringLength(80, ErrorMessage = "Email não pode ter mais de 80 caracteres")]
         public string? Email { get; set; }
 
         public DateTime DataCadastro { get; set; } = DateTime.Now;
-
-
-
     }
 }

@@ -1,12 +1,29 @@
 using LH_PET.Context;
+using LH_PET.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure Serilog
+var logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console(outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss}] [{Level:u3}] {Message:lj}{NewLine}{Exception}")
+    .WriteTo.File(
+        path: "logs/lh_pet-.txt",
+        rollingInterval: RollingInterval.Day,
+        outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss}] [{Level:u3}] {Message:lj}{NewLine}{Exception}")
+    .CreateLogger();
+
+builder.Host.UseSerilog(logger);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
+
+// Add memory cache for rate limiting
+builder.Services.AddMemoryCache();
 
 string? mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -20,9 +37,19 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // JWT configuration
 var jwtSection = builder.Configuration.GetSection("Jwt");
-var jwtKey = jwtSection.GetValue<string>("Key") ?? "change_this_dev_key_please";
+var jwtKey = jwtSection.GetValue<string>("Key");
+
+// Valida que JWT Key não é a padrão/vazia
+if (string.IsNullOrWhiteSpace(jwtKey) || jwtKey.Contains("YOUR_JWT_KEY"))
+{
+    throw new InvalidOperationException(
+        "JWT Key is not configured properly. Please configure 'Jwt:Key' in User Secrets or environment variables. " +
+        "See SECRETS_SETUP.md for instructions.");
+}
+
 var jwtIssuer = jwtSection.GetValue<string>("Issuer") ?? "LH_PET";
 var jwtAudience = jwtSection.GetValue<string>("Audience") ?? "LH_PET";
+var requireHttps = builder.Configuration.GetValue<bool>("Security:RequireHttps", !builder.Environment.IsDevelopment());
 
 builder.Services.AddAuthentication(options =>
 {
@@ -36,7 +63,7 @@ builder.Services.AddAuthentication(options =>
     })
     .AddJwtBearer(options =>
     {
-        options.RequireHttpsMetadata = false;
+        options.RequireHttpsMetadata = requireHttps;
         options.SaveToken = true;
         options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
         {
@@ -52,10 +79,13 @@ builder.Services.AddAuthentication(options =>
 
 
 // Business layer services
-builder.Services.AddScoped<LH_PET.Services.IClienteService, LH_PET.Services.ClienteService>();
-builder.Services.AddScoped<LH_PET.Services.IUserService, LH_PET.Services.UserService>();
-builder.Services.AddScoped<LH_PET.Services.IAnimalService, LH_PET.Services.AnimalService>();
-builder.Services.AddScoped<LH_PET.Services.IConsultaService, LH_PET.Services.ConsultaService>();
+builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAnimalService, AnimalService>();
+builder.Services.AddScoped<IConsultaService, ConsultaService>();
+builder.Services.AddScoped<IValidationService, ValidationService>();
+builder.Services.AddScoped<IRateLimitService, RateLimitService>();
+builder.Services.AddScoped<IAuditService, AuditService>();
 
 
 var app = builder.Build();
